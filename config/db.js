@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('config');
+const mongoURI = "mongodb://localhost:27017/urlshortener";
 const db = config.get('mongoURI');
 
 const connectDB = async () => {
