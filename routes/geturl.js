@@ -5,6 +5,9 @@ const router = express.Router();
 
 const Url = require('../models/model');
 
+router.get('/', (req, res) => {
+  res.sendFile(path.resolve('index.html'));
+});
 
 router.get('/:code', async (req, res) => {
   try {
