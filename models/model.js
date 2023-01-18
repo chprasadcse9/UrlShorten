@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//MongoDB schema creation
 const urlSchema = new mongoose.Schema({
   urlCode: String,
   longUrl: String,

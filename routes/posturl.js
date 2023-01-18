@@ -7,8 +7,8 @@ const config = require('config');
 
 const Url = require('../models/model');
 
-//@route POST /api/url/shorten
-// @desc Create Short URL
+// POST url /api/url/shorten
+//to call psot request henadler method 
 router.post('/shorten', async (req, res) => {
   const { longUrl } = req.body;
   const baseUrl = config.get('baseURL');
