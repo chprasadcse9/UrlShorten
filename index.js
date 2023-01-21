@@ -1,19 +1,25 @@
-const express = require('express');
-
-const connectDB = require('./config/db');
+import express from 'express';
+import connectDB from './config/db.js';
+import dotenv from 'dotenv';
+dotenv.config({ path: './config/.env' });
 
 const app = express();
 
 //connect with DB
 connectDB();
 
-app.use(express.json({ extended: false }));
+import postRouter from './routes/posturl';
+import getRouter from './routes/geturl';
 
-// use routes from Router module
-app.use('/', require('./routes/geturl'));
-app.use('/api/url', require('./routes/posturl'));
+// Body Parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-//Define prot number
-const PORT = 5000;
+app.use('/', getRouter);
+app.use('/api', postRouter);
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+// Server Setup
+const PORT = process.env.PORT || 3333;
+app.listen(PORT, () => {
+  console.log(`Server is running at PORT ${PORT}`);
+});

@@ -1,11 +1,10 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import  url from '../models/model.js';
+export const router = express.Router();
 
-const validUrl = require('valid-url');
-const shortid = require('shortid');
-const config = require('config');
-
-const Url = require('../models/model');
+import validUrl from 'valid-url';
+import shortid from 'shortid';
+import config from 'config';
 
 // POST url /api/url/shorten
 //to call psot request henadler method 
@@ -46,5 +45,3 @@ router.post('/shorten', async (req, res) => {
     res.status(401).json('Invalid long url');
   }
 });
-
-module.exports = router;

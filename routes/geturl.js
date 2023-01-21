@@ -1,14 +1,8 @@
-const express = require('express');
-const path = require('path');
 
-const router = express.Router();
+import express from 'express';
+export const router = express.Router();
+import url from '../models/model.js';
 
-const Url = require('../models/model');
-
-//to call index.html
-router.get('/', (req, res) => {
-  res.sendFile(path.resolve('index.html'));
-});
 
 //to call get request handler method
 router.get('/:code', async (req, res) => {
@@ -26,4 +20,5 @@ router.get('/:code', async (req, res) => {
   }
 });
 
-module.exports = router;
+
+export default router;
