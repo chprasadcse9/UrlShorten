@@ -1,10 +1,7 @@
+//import
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config({ path: './.env' });
-
-//const mongoose = require('mongoose');
-//const config = require('config');
-//const db = config.get('mongoDBURI');
 
 //connect with DB
 const connectDB = async () => {
