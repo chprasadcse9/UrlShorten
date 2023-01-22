@@ -1,14 +1,18 @@
 //import
 import express from 'express';
 import  url from '../models/model.js';
-export const router = express.Router();
+
+import Promise from 'node-promise';
 
 import validUrl from 'valid-url';
 import shortid from 'shortid';
 import config from 'config';
 
+const router = express.Router();
+/*
 // POST url /api/url/shorten
 //to call psot request henadler method 
+
 router.post('/shorten', async (req, res) => {
   const { longUrl } = req.body;
   const baseUrl = config.get('baseURL');
@@ -45,4 +49,28 @@ router.post('/shorten', async (req, res) => {
   } else {
     res.status(401).json('Invalid long url');
   }
+});
+*/
+//const urlCode = shortid.generate();
+exports.routes.post('/shorten', () =>{
+  var generatePromise
+    , promise = new Promise();
+
+  document['data'] = document.data || null;
+
+  // hash was specified, so we should always honor it
+  if (document.hasOwnProperty()) {
+    generatePromise = ShortURL.create(document);
+  } else {
+    document['hash'] = ID.store(document.URL);
+    generatePromise = ShortURL.findOne({URL : document.URL}, document, {});
+  }
+
+  generatePromise.then(function(ShortURLObject) {
+    promise.resolve(ShortURLObject);
+  }, function(error) {
+    promise.reject(error, true);
+  });
+
+  return promise;
 });

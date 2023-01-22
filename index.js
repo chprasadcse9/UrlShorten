@@ -5,22 +5,21 @@ import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 
 const app = express();
+app.use(express.json());
 
 //connect with DB
 connectDB();
 
-import postRouter from './routes/posturl';
-import getRouter from './routes/geturl';
+//imort routes
+import postRouter from './routes/post';
+import getRouter from './routes/get';
 
 // Body Parser
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.use('/', getRouter);
 app.use('/api', postRouter);
 
 // Server Setup
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT}`);
 });

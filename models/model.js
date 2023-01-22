@@ -1,8 +1,8 @@
-//import
+
 import mongoose from 'mongoose';
 
-//MongoDB schema creation
-const urlSchema = new mongoose.Schema({
+
+exports.urlSchema = new mongoose.Schema({
   urlCode: String,
   longUrl: String,
   shortUrl: String,

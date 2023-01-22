@@ -1,9 +1,10 @@
 //import
 import express from 'express';
-export const router = express.Router();
+
 import url from '../models/model.js';
 
-
+exports.router = express.Router();
+/*
 //to call get request handler method
 router.get('/:code', async (req, res) => {
   try {
@@ -19,6 +20,16 @@ router.get('/:code', async (req, res) => {
     res.status(500).json('server error');
   }
 });
+*/
 
-
-export default router;
+exports.router.get('/:code', () => {
+  var promise = new Promise();
+  this.baseModel.findOne( function(error, result) {
+    if (error) {
+      promise.reject(error, true);
+    } else {
+      promise.resolve(result);
+    };
+  });
+  return promise;
+});
