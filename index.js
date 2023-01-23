@@ -4,15 +4,15 @@ import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 dotenv.config({ path: './config/.env' });
 
+//imort routes
+import postRouter from './routes/post';
+import getRouter from './routes/get';
+
 const app = express();
 app.use(express.json());
 
 //connect with DB
 connectDB();
-
-//imort routes
-import postRouter from './routes/post';
-import getRouter from './routes/get';
 
 // Body Parser
 app.use('/', getRouter);

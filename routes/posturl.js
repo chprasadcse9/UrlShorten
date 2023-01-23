@@ -9,11 +9,11 @@ import shortid from 'shortid';
 import config from 'config';
 
 const router = express.Router();
-/*
+
 // POST url /api/url/shorten
 //to call psot request henadler method 
 
-router.post('/shorten', async (req, res) => {
+exports.router.post('/shorten', async (req, res) => {
   const { longUrl } = req.body;
   const baseUrl = config.get('baseURL');
 
@@ -50,8 +50,9 @@ router.post('/shorten', async (req, res) => {
     res.status(401).json('Invalid long url');
   }
 });
-*/
-//const urlCode = shortid.generate();
+
+
+/*
 exports.routes.post('/shorten', () =>{
   var generatePromise
     , promise = new Promise();
@@ -66,11 +67,12 @@ exports.routes.post('/shorten', () =>{
     generatePromise = ShortURL.findOne({URL : document.URL}, document, {});
   }
 
-  generatePromise.then(function(ShortURLObject) {
+  generatePromise.then((ShortURLObject) =>{
     promise.resolve(ShortURLObject);
-  }, function(error) {
+  }, (error) =>{
     promise.reject(error, true);
   });
 
   return promise;
 });
+*/

@@ -4,9 +4,9 @@ import express from 'express';
 import url from '../models/model.js';
 
 exports.router = express.Router();
-/*
+
 //to call get request handler method
-router.get('/:code', async (req, res) => {
+exports.router.get('/:code', async (req, res) => {
   try {
     const url = await Url.findOne({ urlCode: req.params.code });
 
@@ -20,8 +20,9 @@ router.get('/:code', async (req, res) => {
     res.status(500).json('server error');
   }
 });
-*/
 
+
+/*
 exports.router.get('/:code', () => {
   var promise = new Promise();
   this.baseModel.findOne( function(error, result) {
@@ -33,3 +34,4 @@ exports.router.get('/:code', () => {
   });
   return promise;
 });
+*/
