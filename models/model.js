@@ -3,10 +3,18 @@ import mongoose from 'mongoose';
 
 
 exports.urlSchema = new mongoose.Schema({
-  urlCode: String,
-  longUrl: String,
-  shortUrl: String,
-  date: { type: String, default: Date.now },
+  url: {
+    type: String,
+    required: true
+  },
+  siteId: {
+    type: String,
+    default: shortid.generate
+  },
+  creatorId: {
+    type: String,
+    require: true
+  }
 });
 
 

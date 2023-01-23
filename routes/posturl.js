@@ -1,9 +1,11 @@
 //import
 import express from 'express';
 import  url from '../models/model.js';
+import chekAuth from '../middleware/check-auth';
+import PRE_HTTP from 'http://';
+
 
 import Promise from 'node-promise';
-
 import validUrl from 'valid-url';
 import shortid from 'shortid';
 import config from 'config';
@@ -13,44 +15,38 @@ const router = express.Router();
 // POST url /api/url/shorten
 //to call psot request henadler method 
 
-exports.router.post('/shorten', async (req, res) => {
-  const { longUrl } = req.body;
-  const baseUrl = config.get('baseURL');
-
-  if (!validUrl.isUri(baseUrl)) {
-    return res.status(401).json('invalid base url');
-  }
-
-  // create url code
-  const urlCode = shortid.generate();
-
-  // check long url
-  if (validUrl.isUri(longUrl)) {
-    try {
-      let url = await Url.findOne({ longUrl });
-      if (url) {
-        res.json(url);
-      } else {
-        const shortUrl = baseUrl + '/' + urlCode;
-
-        url = new Url({
-          longUrl,
-          shortUrl,
-          urlCode,
-          date: new Date(),
-        });
-        await url.save();
-        res.json(url);
-      }
-    } catch (error) {
-      console.log(error);
-      res.status(500).json('server error');
-    }
+exports.router.post("/ShortId", chekAuth, (req, res, next) => {
+  req.check("url", "invalid URL").isURL();
+  const validationErrors = req.validationErrors();
+  if (validationErrors) {
+    res.status(400).json({
+      error: validationErrors
+    });
   } else {
-    res.status(401).json('Invalid long url');
+    if (!req.body.url.match(/^[a-zA-Z]+:\/\//)) {
+      var reqUrl = PRE_HTTP + req.body.url;
+    } else {
+      var reqUrl = req.body.url;
+    }
+    const url = new Url({
+      url: reqUrl,
+      creatorId: req.userData.userId
+     });
+    url
+      .save()
+      .then(result => {
+        res.status(201).json({
+          success: true,
+          urlCreated: result
+        });
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: err
+        });
+      });
   }
 });
-
 
 /*
 exports.routes.post('/shorten', () =>{

@@ -6,20 +6,33 @@ import url from '../models/model.js';
 exports.router = express.Router();
 
 //to call get request handler method
-exports.router.get('/:code', async (req, res) => {
-  try {
-    const url = await Url.findOne({ urlCode: req.params.code });
-
-    if (url) {
-      return res.redirect(url.longUrl);
-    } else {
-      return res.status(404).json('No url found');
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json('server error');
-  }
+exports.router.get("/:userId", chekAuth, (req, res, next) => {
+  Url.find({ creatorId: req.userData.userId })
+    .select("_id url siteId")
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        success: true,
+        count: result.length,
+        urlData: result.map(result => {
+          return {
+            _id: result._id,
+            siteId: result.siteId,
+            orgUrl: result.url,
+            short: {
+              shortUrl: SHORTENER_URL + result.siteId
+            }
+          };
+        })
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
 });
+
 
 
 /*
