@@ -1,7 +1,7 @@
 //import
 import express from 'express';
 import  url from '../models/model.js';
-import chekAuth from '../middleware/check-auth';
+import chekAuth from '../middleware/auth';
 import PRE_HTTP from 'http://';
 
 

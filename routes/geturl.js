@@ -2,13 +2,14 @@
 import express from 'express';
 
 import url from '../models/model.js';
+import chekAuth from '../middleware/auth';
 
 exports.router = express.Router();
 
 //to call get request handler method
-exports.router.get("/:userId", chekAuth, (req, res, next) => {
+exports.router.get("/", chekAuth, (req, res, next) => {
   Url.find({ creatorId: req.userData.userId })
-    .select("_id url siteId")
+    .select("_id url shortId")
     .exec()
     .then(result => {
       res.status(200).json({
@@ -17,10 +18,10 @@ exports.router.get("/:userId", chekAuth, (req, res, next) => {
         urlData: result.map(result => {
           return {
             _id: result._id,
-            siteId: result.siteId,
+            shortId: result.shortId,
             orgUrl: result.url,
             short: {
-              shortUrl: SHORTENER_URL + result.siteId
+              shortUrl: SHORTENER_URL + result.shortId
             }
           };
         })

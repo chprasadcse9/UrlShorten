@@ -2,7 +2,8 @@
 import express from 'express';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
-dotenv.config({ path: './config/.env' });
+dotenv.config({ path: './.env' });
+
 
 //imort routes
 import postRouter from './routes/post';
