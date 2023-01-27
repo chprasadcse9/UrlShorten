@@ -1,8 +1,8 @@
 //import
-import express from 'express';
+import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import connectDB from './config/db.js';
-import dotenv from 'dotenv';
-dotenv.config({ path: './.env' });
+require('dotenv').config();
 
 
 //imort routes

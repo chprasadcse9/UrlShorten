@@ -7,7 +7,7 @@ exports.urlSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  siteId: {
+  shortId: {
     type: String,
     default: shortid.generate
   },
