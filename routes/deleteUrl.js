@@ -1,5 +1,5 @@
-import express from 'express';
-
+import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import url from '../models/model.js';
 
 exports.router = express.Router();

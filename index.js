@@ -2,7 +2,8 @@
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import connectDB from './config/db.js';
-require('dotenv').config();
+import dotenv from dotenv;
+dotenv.config(path='./..env');
 
 
 //imort routes
@@ -23,13 +24,13 @@ app.use('/api', postRouter);
 app.use('/shortId', deleteRouter);
 
 
-app.use((req, res, next) => {
+app.use((request, Response, next) => {
   const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
 
-app.use((error, req, res, next) => {
+app.use((error, equest, Response, next) => {
   res.status(error.status || 500);
   res.json({
     error: {

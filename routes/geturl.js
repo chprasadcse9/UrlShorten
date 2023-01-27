@@ -1,5 +1,6 @@
 //import
-import express from 'express';
+import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import url from '../models/model.js';
 import chekAuth from '../middleware/auth';

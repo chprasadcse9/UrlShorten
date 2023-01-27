@@ -1,4 +1,11 @@
 const jwt = require("jsonwebtoken");
+import dotenv from dotenv;
+dotenv.config(path='./..env');
+
+var createToken = (data) => {
+    let token = jwt.sign(data, process.env.jwt_secret)
+    return { "generated_token": token}
+}
 
 exports.checkAuth = (req, res, next) => {
   try {
@@ -12,4 +19,3 @@ exports.checkAuth = (req, res, next) => {
     });
   }
 };
-
