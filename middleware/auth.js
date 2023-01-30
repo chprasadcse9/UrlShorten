@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
-import dotenv from dotenv;
-dotenv.config(path='./..env');
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 var createToken = (data) => {
     let token = jwt.sign(data, process.env.jwt_secret)
     return { "generated_token": token}
 }
 
-exports.checkAuth = (req, res, next) => {
+const checkAuth = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, "secret");
@@ -19,3 +19,5 @@ exports.checkAuth = (req, res, next) => {
     });
   }
 };
+
+export default checkAuth;

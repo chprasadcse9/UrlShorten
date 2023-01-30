@@ -1,12 +1,13 @@
 //import
 import mongoose from 'mongoose';
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 //connect with DB
-exports.connectDB = async () => {
+const connectDB = function() {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+      mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -16,3 +17,6 @@ exports.connectDB = async () => {
     process.exit(1);
   }
 };
+
+
+export default connectDB;

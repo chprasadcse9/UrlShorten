@@ -1,23 +1,18 @@
 //import
-import * as express from 'express';
-import { Request, Response, NextFunction } from 'express';
-
-import  url from '../models/model';
-import chekAuth from '../middleware/auth';
-import PRE_HTTP from 'http://';
+import express from 'express';
+import  Url from '../models/model.js';
+import checkAuth from '../middleware/auth.js';
+import PRE_HTTP from 'node:https';
 
 
-import Promise from 'node-promise';
-import validUrl from 'valid-url';
-import shortid from 'shortid';
-import config from 'config';
+//import Promise from 'node-promise';
 
 const router = express.Router();
 
 // POST url /api/url/shorten
 //to call psot request henadler method 
 
-exports.router.post("/ShortId", chekAuth, (req, res, next) => {
+router.post("/ShortId", checkAuth, (req, res, next) => {
   req.check("url", "invalid URL").isURL();
   const validationErrors = req.validationErrors();
   if (validationErrors) {
@@ -32,7 +27,7 @@ exports.router.post("/ShortId", chekAuth, (req, res, next) => {
     }
     const url = new Url({
       url: reqUrl,
-      creatorId: req.userData.userId
+      //creatorId: req.userData.userId
      });
     url
       .save()
@@ -50,13 +45,15 @@ exports.router.post("/ShortId", chekAuth, (req, res, next) => {
   }
 });
 
+export default router;
+
+
+
 /*
 exports.routes.post('/shorten', () =>{
   var generatePromise
     , promise = new Promise();
-
   document['data'] = document.data || null;
-
   // hash was specified, so we should always honor it
   if (document.hasOwnProperty()) {
     generatePromise = ShortURL.create(document);
@@ -64,13 +61,11 @@ exports.routes.post('/shorten', () =>{
     document['hash'] = ID.store(document.URL);
     generatePromise = ShortURL.findOne({URL : document.URL}, document, {});
   }
-
   generatePromise.then((ShortURLObject) =>{
     promise.resolve(ShortURLObject);
   }, (error) =>{
     promise.reject(error, true);
   });
-
   return promise;
 });
 */

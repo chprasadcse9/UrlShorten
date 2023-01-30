@@ -2,14 +2,14 @@
 import mongoose from 'mongoose';
 
 
-exports.urlSchema = new mongoose.Schema({
+const URLSchema = new mongoose.Schema({
   url: {
     type: String,
     required: true
   },
   shortId: {
     type: String,
-    default: shortid.generate
+    
   },
   creatorId: {
     type: String,
@@ -18,4 +18,6 @@ exports.urlSchema = new mongoose.Schema({
 });
 
 
-export default mongoose.model('Url', UrlSchema);
+export default mongoose.model('Url', URLSchema);
+
+

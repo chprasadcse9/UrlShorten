@@ -1,14 +1,12 @@
 //import
-import * as express from 'express';
-import { Request, Response, NextFunction } from 'express';
+import express from 'express';
+import Url from '../models/model.js';
+import checkAuth from '../middleware/auth.js';
 
-import url from '../models/model.js';
-import chekAuth from '../middleware/auth';
-
-exports.router = express.Router();
+const router = express.Router();
 
 //to call get request handler method
-exports.router.get("/", chekAuth, (req, res, next) => {
+router.get("/", checkAuth, (req, res, next) => {
   Url.find({ creatorId: req.userData.userId })
     .select("_id url shortId")
     .exec()
@@ -35,6 +33,7 @@ exports.router.get("/", chekAuth, (req, res, next) => {
     });
 });
 
+export default router;
 
 
 /*
