@@ -7,12 +7,12 @@ import PRE_HTTP from 'node:https';
 
 //import Promise from 'node-promise';
 
-const router = express.Router();
+exports.router = express.Router();
 
 // POST url /api/url/shorten
 //to call psot request henadler method 
 
-router.post("/ShortId", checkAuth, (req, res, next) => {
+exports.router.post("/ShortId", checkAuth, (req, res) => {
   req.check("url", "invalid URL").isURL();
   const validationErrors = req.validationErrors();
   if (validationErrors) {

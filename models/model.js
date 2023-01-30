@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 
-const URLSchema = new mongoose.Schema({
+exports.URLSchema = new mongoose.Schema({
   url: {
     type: String,
     required: true

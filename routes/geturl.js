@@ -3,10 +3,10 @@ import express from 'express';
 import Url from '../models/model.js';
 import checkAuth from '../middleware/auth.js';
 
-const router = express.Router();
+exports.router = express.Router();
 
 //to call get request handler method
-router.get("/", checkAuth, (req, res, next) => {
+exports.router.get("/", checkAuth, (req, res, next) => {
   Url.find({ creatorId: req.userData.userId })
     .select("_id url shortId")
     .exec()
